@@ -29,7 +29,6 @@ namespace ViveSR.anipal.Eye
                 Ray GazeRay;
                 if (SRanipal_Eye.Focus(index, out GazeRay, out FocusInfo, MaxDistance))
                 {
-                    Debug.Log("進入focus啦ouoˋ");
                     DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
                     if (dartBoard != null) dartBoard.Focus(FocusInfo.point);
                     break;
