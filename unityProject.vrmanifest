@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.eyetrackingproject.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\user\\Desktop\\資工碩一張采庭\\Eye-Tracking\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Eye Tracking Project [Testing]"
+        }
+      }
+    }
+  ]
+}

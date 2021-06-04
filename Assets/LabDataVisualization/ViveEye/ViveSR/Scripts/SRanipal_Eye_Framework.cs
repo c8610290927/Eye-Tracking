@@ -52,6 +52,7 @@ namespace ViveSR
                 {
                     if (!EnableEye) return;
                     if (Status == FrameworkStatus.WORKING) return;
+                    Debug.Log("SRanipal_Eye.IsViveProEye(): "+ SRanipal_Eye.IsViveProEye());
                     if (!SRanipal_Eye.IsViveProEye())
                     {
                         Status = FrameworkStatus.NOT_SUPPORT;
