@@ -1,5 +1,6 @@
 ﻿//========= Copyright 2018, HTC Corporation. All rights reserved. ===========
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace ViveSR.anipal.Eye
@@ -9,6 +10,10 @@ namespace ViveSR.anipal.Eye
         private FocusInfo FocusInfo;
         private readonly float MaxDistance = 20;
         private readonly GazeIndex[] GazePriority = new GazeIndex[] { GazeIndex.COMBINE, GazeIndex.LEFT, GazeIndex.RIGHT };
+        string FocusName { get; set; }
+        string FocusTag { get; set; }
+        float Timer = 0f;
+
 
         private void Start()
         {
@@ -17,6 +22,9 @@ namespace ViveSR.anipal.Eye
                 enabled = false;
                 return;
             }
+
+            FocusName = "";
+            FocusTag = "";
         }
 
         private void Update()
@@ -29,11 +37,26 @@ namespace ViveSR.anipal.Eye
                 Ray GazeRay;
                 if (SRanipal_Eye.Focus(index, out GazeRay, out FocusInfo, MaxDistance))
                 {
-                    DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
-                    if (dartBoard != null) dartBoard.Focus(FocusInfo.point);
+                    FocusTag = FocusInfo.collider.tag;
+                    Debug.Log("射線撞到: " + FocusInfo.collider.name);
+
+                    if (FocusTag == "target")
+                    {
+                        if(FocusInfo.collider.name == FocusName) Timer += Time.deltaTime;
+                        FocusName = FocusInfo.collider.name;
+                    }
+                    else Timer = 0f;
+
+                    if(Timer >= 3) Destroy(GameObject.Find(FocusInfo.collider.name));
+
+                    /*DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
+                    if (dartBoard != null) dartBoard.Focus(FocusInfo.point);*/
+                    GameObject.Find("Canvas").GetComponent<timerUpdata>().changeText(Timer);
                     break;
                 }
+                else Timer = 0f;
             }
         }
+
     }
 }

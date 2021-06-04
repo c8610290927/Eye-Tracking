@@ -673,12 +673,15 @@
     <Compile Include="Assets\Scripts\Test\Test_FileTestData.cs" />
     <Compile Include="Assets\Scripts\Test\Test_SrcGet.cs" />
     <Compile Include="Assets\Scripts\Test\Test_Task.cs" />
+    <Compile Include="Assets\Scripts\timerUpdata.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\PanelBase\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\PanleConfig\PanleData.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\PanleData\PanleDatas.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\UIController\UIController.cs" />
     <None Include="Assets\LabDataVisualization\Vectrosity\Vectrosity\Plugins\VectrosityDemos\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
     <None Include="Assets\EquipmentSDK\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
+    <None Include="Assets\LabDataVisualization\ViveEye\ViveSR\Shaders\DartBoardShader.shader" />
+    <None Include="Assets\LabDataVisualization\ViveEye\ViveSR\Shaders\Unlit-Alpha2Gray.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Desktop/資工碩一張采庭/Eye-Tracking/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -1282,6 +1285,10 @@
       <Project>{680A9AC4-B856-0BA5-0867-63CB877346F4}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="SteamVR_Actions.csproj">
+      <Project>{FFB4C05A-B872-25D0-C289-649170B21E1D}</Project>
+      <Name>SteamVR_Actions</Name>
+    </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
       <Project>{060EEAC9-C46F-CF35-B287-60FD80F4E8EF}</Project>
       <Name>SteamVR_Input_Editor</Name>
@@ -1297,10 +1304,6 @@
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
       <Project>{A9276AE4-C191-4CBB-1F74-A0BABEEB8818}</Project>
       <Name>SteamVR_Windows_EditorHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="SteamVR_Actions.csproj">
-      <Project>{FFB4C05A-B872-25D0-C289-649170B21E1D}</Project>
-      <Name>SteamVR_Actions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
