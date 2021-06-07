@@ -14,7 +14,7 @@ namespace ViveSR.anipal.Eye
         string FocusTag { get; set; }
         float Timer = 0f;
         float reciprocal = 0f; //倒數秒數
-        int score = 0; //注視成功次數
+        public static int score = 0; //注視成功次數
 
 
         private void Start()
@@ -29,9 +29,9 @@ namespace ViveSR.anipal.Eye
             FocusTag = "";
 
             //設定不同難易度的注視倒數時間
-            if(MainUI.mode == "easy") reciprocal = 2f;
-            else if(MainUI.mode == "normal") reciprocal = 3f;
-            else reciprocal = 5f;
+            if(MainUI.mode == "easy") reciprocal = 1f;
+            else if(MainUI.mode == "normal") reciprocal = 2f;
+            else reciprocal = 3f;
         }
 
         private void Update()
