@@ -7,9 +7,23 @@ using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
-    public void changeScene()
+    public static string mode;
+    public void changeSceneEasy()
     {
-        Debug.Log("按下去了");
+        Debug.Log("按Easy");
+        mode = "easy";
+        GameSceneManager.Instance.Change2MainScene();
+    }
+    public void changeSceneNormal()
+    {
+        Debug.Log("按Normal");
+        mode = "normal";
+        GameSceneManager.Instance.Change2MainScene();
+    }
+    public void changeSceneHard()
+    {
+        Debug.Log("按Hard");
+        mode = "hard";
         GameSceneManager.Instance.Change2MainScene();
     }
 }

@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class timerUpdata : MonoBehaviour
 {
-    public Text text;
+    public Text fixationTimer;
+    public Text GameTimer;
 
-    public void changeText(float timer)
+    public void changeFixationText(float timer)
     {
-        text.text = "注視時間: "+timer.ToString("0.00");
+        fixationTimer.text = "Fixation Time: "+timer.ToString("0.00");
+    }
+    public void changeGameText(float timer)
+    {
+        GameTimer.text = "Time: "+timer.ToString("0.00");
     }
 }

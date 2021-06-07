@@ -13,6 +13,7 @@ namespace ViveSR.anipal.Eye
         string FocusName { get; set; }
         string FocusTag { get; set; }
         float Timer = 0f;
+        float reciprocal = 0f; //倒數秒數
 
 
         private void Start()
@@ -25,6 +26,11 @@ namespace ViveSR.anipal.Eye
 
             FocusName = "";
             FocusTag = "";
+
+            //設定不同難易度的注視倒數時間
+            if(MainUI.mode == "easy") reciprocal = 2f;
+            else if(MainUI.mode == "normal") reciprocal = 3f;
+            else reciprocal = 5f;
         }
 
         private void Update()
@@ -39,6 +45,8 @@ namespace ViveSR.anipal.Eye
                 {
                     FocusTag = FocusInfo.collider.tag;
                     Debug.Log("射線撞到: " + FocusInfo.collider.name);
+                    DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
+                    if (dartBoard != null) dartBoard.Focus(FocusInfo.point);
 
                     if (FocusTag == "target")
                     {
@@ -47,11 +55,13 @@ namespace ViveSR.anipal.Eye
                     }
                     else Timer = 0f;
 
-                    if(Timer >= 3) Destroy(GameObject.Find(FocusInfo.collider.name));
+                    if(Timer >= reciprocal) 
+                    {
+                        Destroy(GameObject.Find(FocusInfo.collider.name));
+                        Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3.5f, 3.5f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-5.5f, -4.0f)), new Quaternion(0, 0, 0, 0));
+                    }
 
-                    /*DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
-                    if (dartBoard != null) dartBoard.Focus(FocusInfo.point);*/
-                    GameObject.Find("Canvas").GetComponent<timerUpdata>().changeText(Timer);
+                    GameObject.Find("Canvas").GetComponent<timerUpdata>().changeFixationText(Timer);
                     break;
                 }
                 else Timer = 0f;
