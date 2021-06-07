@@ -14,6 +14,7 @@ namespace ViveSR.anipal.Eye
         string FocusTag { get; set; }
         float Timer = 0f;
         float reciprocal = 0f; //倒數秒數
+        int score = 0; //注視成功次數
 
 
         private void Start()
@@ -57,8 +58,9 @@ namespace ViveSR.anipal.Eye
 
                     if(Timer >= reciprocal) 
                     {
+                        score += 1;
                         Destroy(GameObject.Find(FocusInfo.collider.name));
-                        Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3.5f, 3.5f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-5.5f, -4.0f)), new Quaternion(0, 0, 0, 0));
+                        Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3.0f, 3.0f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-4.0f, -2.0f)), new Quaternion(0, 0, 0, 0));
                     }
 
                     GameObject.Find("Canvas").GetComponent<timerUpdata>().changeFixationText(Timer);

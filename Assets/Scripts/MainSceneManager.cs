@@ -5,6 +5,7 @@ using LabVisualization;
 
 public class MainSceneManager : MonoBehaviour
 {
+    float gameTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class MainSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameTime += Time.deltaTime;
+        GameObject.Find("Canvas").GetComponent<timerUpdata>().changeGameText(gameTime);
     }
 }
