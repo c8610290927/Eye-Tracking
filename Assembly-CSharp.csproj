@@ -589,6 +589,7 @@
      <Compile Include="Assets\LabDataVisualization\ViveEye\ViveSR\Scripts\SRanipal_Eye_Framework.cs" />
      <Compile Include="Assets\LabDataVisualization\ViveEye\ViveSR\Scripts\SRanipal_EyeShapeTableDrawer.cs" />
      <Compile Include="Assets\LabDataVisualization\ViveEye\ViveSR\Scripts\SRWorks_Enums.cs" />
+     <Compile Include="Assets\Scripts\EyePositionData.cs" />
      <Compile Include="Assets\Scripts\LabFrameRelease\Config\ApplicationConfig.cs" />
      <Compile Include="Assets\Scripts\LabFrameRelease\Enum\Enum.cs" />
      <Compile Include="Assets\Scripts\LabFrameRelease\GameApplication\GameApplication.cs" />
@@ -654,7 +655,7 @@
      <Compile Include="Assets\Scripts\Test\Test_FileTestData.cs" />
      <Compile Include="Assets\Scripts\Test\Test_SrcGet.cs" />
      <Compile Include="Assets\Scripts\Test\Test_Task.cs" />
-     <Compile Include="Assets\Scripts\timerUpdata.cs" />
+     <Compile Include="Assets\Scripts\TextUpdate.cs" />
      <Compile Include="Assets\Scripts\UIFrameWork\PanelBase\BasePanel.cs" />
      <Compile Include="Assets\Scripts\UIFrameWork\PanleConfig\PanleData.cs" />
      <Compile Include="Assets\Scripts\UIFrameWork\PanleData\PanleDatas.cs" />

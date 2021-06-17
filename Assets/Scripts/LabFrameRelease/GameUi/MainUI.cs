@@ -7,7 +7,20 @@ using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
+    public GameObject LoginPage, ModePage;
+
+    [Header("LoginPage")]
+    #region LoginPage
+    public InputField UserID;
+    #endregion
+
     public static string mode;
+
+    public void gameStartClick()
+    {
+        ModePage.SetActive(true);
+        LoginPage.SetActive(false);
+    }
     public void changeSceneEasy()
     {
         Debug.Log("按Easy");

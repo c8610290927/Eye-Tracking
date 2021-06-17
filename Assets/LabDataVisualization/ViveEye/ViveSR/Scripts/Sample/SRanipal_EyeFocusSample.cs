@@ -1,4 +1,4 @@
-﻿//========= Copyright 2018, HTC Corporation. All rights reserved. ===========
+//========= Copyright 2018, HTC Corporation. All rights reserved. ===========
 using System;
 using System.Collections;
 using UnityEngine;
@@ -16,6 +16,11 @@ namespace ViveSR.anipal.Eye
         float reciprocal = 0f; //倒數秒數
         public static int score = 0; //注視成功次數
 
+        //標靶生成位置(各30組)
+        float[] positionX = new float[] {2.13f, -0.01f, 1.33f, -0.84f, 0.46f, -1.82f, 2.91f, -1.88f, 1.24f, -1.24f, 2.70f, -1.18f, 2.33f, -1.13f, 0.30f, -0.08f, 0.90f, -0.63f, -1.14f, 2.57f, 1.33f, -0.84f, 0.46f, -1.82f, 2.91f, -0.08f, 0.90f, -0.63f, -1.14f, 2.57f};
+        float[] positionY = new float[] {9.98f, 9.67f, 8.93f, 9.88f, 9.40f, 8.99f, 8.83f, 8.84f, 8.07f, 8.15f, 9.80f, 9.46f, 9.49f, 8.95f, 8.90f, 9.40f, 8.34f, 9.48f, 9.75f, 9.35f, 9.88f, 9.40f, 8.99f, 8.83f, 8.84f, 8.07f, 8.15f, 9.80f, 9.46f, 9.49f};
+        float[] positionZ = new float[] {-3.86f, -3.86f, -2.92f, -2.75f, -3.99f, -3.75f, -2.55f, -2.06f, -3.59f, -2.77f, -3.03f, -2.33f, -2.73f, -2.19f, -3.99f, -3.72f, -2.12f, 3.45f, -2.89f, -3.44f, -3.86f, -2.92f, -2.75f, -3.99f, -2.06f, -3.59f, -2.77f, -3.03f, -2.33f, -2.73f};
+
 
         private void Start()
         {
@@ -29,8 +34,8 @@ namespace ViveSR.anipal.Eye
             FocusTag = "";
 
             //設定不同難易度的注視倒數時間
-            if(MainUI.mode == "easy") reciprocal = 1f;
-            else if(MainUI.mode == "normal") reciprocal = 2f;
+            if (MainUI.mode == "easy") reciprocal = 1f;
+            else if (MainUI.mode == "normal") reciprocal = 2f;
             else reciprocal = 3f;
         }
 
@@ -60,10 +65,11 @@ namespace ViveSR.anipal.Eye
                     {
                         score += 1;
                         Destroy(GameObject.Find(FocusInfo.collider.name));
-                        Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3.0f, 3.0f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-4.0f, -2.0f)), new Quaternion(0, 0, 0, 0));
+                        Instantiate(dartBoard, new Vector3(positionX[score], positionY[score], positionZ[score]), new Quaternion(0, 0, 0, 0));
+                        //Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-4.0f, -2.0f)), new Quaternion(0, 0, 0, 0));
                     }
 
-                    GameObject.Find("Canvas").GetComponent<timerUpdata>().changeFixationText(Timer);
+                    GameObject.Find("Canvas").GetComponent<TextUpdate>().changeFixationText(Timer);
                     break;
                 }
                 else Timer = 0f;

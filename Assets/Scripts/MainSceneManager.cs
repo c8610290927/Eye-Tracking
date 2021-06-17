@@ -23,14 +23,14 @@ public class MainSceneManager : MonoBehaviour
     void Update()
     {
         gameTime -= Time.deltaTime;
-        GameObject.Find("Canvas").GetComponent<timerUpdata>().changeGameText(gameTime);
+        GameObject.Find("Canvas").GetComponent<TextUpdate>().changeGameText(gameTime);
 
         if(gameTime <= 0)
         {
             //Time.timeScale = 0f; //時間暫停
             //Debug.Log(GameObject.FindObjectOfType<Image>().name);
-            GameObject.Find("Canvas").GetComponent<timerUpdata>().changeFixationTimesText(SRanipal_EyeFocusSample.score);
-            GameObject.Find("Canvas").GetComponent<timerUpdata>().changeModeText(MainUI.mode);
+            GameObject.Find("Canvas").GetComponent<TextUpdate>().changeFixationTimesText(SRanipal_EyeFocusSample.score);
+            GameObject.Find("Canvas").GetComponent<TextUpdate>().changeModeText(MainUI.mode);
             image.SetActive(true); //顯示結算畫面
             //刪除後方倒數
             GameObject.Find("FixationTimer").gameObject.SetActive(false); 

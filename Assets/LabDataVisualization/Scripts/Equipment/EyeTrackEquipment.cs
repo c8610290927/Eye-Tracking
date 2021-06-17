@@ -99,12 +99,12 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
                     if (SRanipal_Eye.Focus(GazePriority[0], out GazeRay, out FocusInfo, float.MaxValue))
                     {
                         FocusName = FocusInfo.collider.gameObject.name;
-                        Debug.Log("射線撞到: "+FocusName);
+                        //Debug.Log("射線撞到: "+FocusName+"啦啦啦啦啦");
                         GameEventCenter.DispatchEvent("ShowEyeFocus", FocusName);
                         GameEventCenter.DispatchEvent("GetEyeContact", FocusName);
 
                         //回傳labdata的資料 要另外寫一個class
-                        /*var eyepositiondata = new EyePositionData() //記錄eyedata
+                        var eyepositiondata = new EyePositionData() //記錄eyedata
                         {
                             X = FocusInfo.point.x,
                             Y = FocusInfo.point.y,
@@ -114,9 +114,9 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
                             Eye_Openness = LeftData.eye_openness
                         };
                         GameDataManager.LabDataManager.SendData(eyepositiondata);
-                        //Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
-                        //Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
-                        */ 
+                        Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
+                        Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
+                        
                     }
                 }
             }
