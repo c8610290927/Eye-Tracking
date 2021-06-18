@@ -73,22 +73,21 @@ namespace ViveSR.anipal.Eye
                         //回傳labdata的資料 要另外寫一個class
                         EyePositionData eyepositiondata = new EyePositionData() //記錄eyedata
                         {
-                           // X = FocusInfo.point.x,
-                            //Y = FocusInfo.point.y,
+                            X = FocusInfo.point.x,
+                            Y = FocusInfo.point.y,
                             //Z = FocusInfo.point.z,
                             //FocusObject = FocusName,
-                            Pupil_Diameter = Combined.pupil_diameter_mm,
-                            Eye_Openness = Combined.eye_openness
+                            Pupil_Diameter = data.left.pupil_diameter_mm,
+                            Eye_Openness = data.left.eye_openness
                         };
-                        Debug.Log("030");
+                        //Debug.Log("PupilSize (R) :" + data.right.pupil_diameter_mm);
+                        Debug.Log("eyepositiondata (XY) :" + eyepositiondata.X + eyepositiondata.Y);
 
                         GameDataManager.LabDataManager.SendData(eyepositiondata);
                         //LabTools.WriteData(eyepositiondata, "default", true);
 
-                        Debug.Log("0303");
-
                        // Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
-                        Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
+                        
                     }
                 }
             }

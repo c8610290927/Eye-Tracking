@@ -108,7 +108,7 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
                         GameEventCenter.DispatchEvent("GetEyeContact", FocusName);
 
                         //回傳labdata的資料 要另外寫一個class
-                        var eyepositiondata = new EyePositionData() //記錄eyedata
+                        /*var eyepositiondata = new EyePositionData() //記錄eyedata
                         {
                             X = FocusInfo.point.x,
                             Y = FocusInfo.point.y,
@@ -124,7 +124,7 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
                         Debug.Log("0303");
 
                         Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
-                        Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
+                        Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);*/
                         
                     }
                 }
