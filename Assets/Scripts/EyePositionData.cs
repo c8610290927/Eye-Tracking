@@ -11,7 +11,8 @@ namespace LabData
     {
         public float X;
         public float Y;
-        public float Pupil_Diameter;
+        public float Pupil_Diameter_Left;
+        public float Pupil_Diameter_Right;
         public float Eye_Openness;
     }
 }

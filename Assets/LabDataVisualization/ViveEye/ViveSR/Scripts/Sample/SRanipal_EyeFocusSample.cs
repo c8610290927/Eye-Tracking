@@ -75,14 +75,14 @@ namespace ViveSR.anipal.Eye
                         {
                             X = FocusInfo.point.x,
                             Y = FocusInfo.point.y,
-                            Pupil_Diameter = data.left.pupil_diameter_mm,
+                            Pupil_Diameter_Left = data.left.pupil_diameter_mm,
+                            Pupil_Diameter_Right = data.right.pupil_diameter_mm,
                             Eye_Openness = data.left.eye_openness
                         };
                         //Debug.Log("PupilSize (R) :" + data.right.pupil_diameter_mm);
                         Debug.Log("eyepositiondata (XY) :" + eyepositiondata.X + eyepositiondata.Y);
 
-                        GameDataManager.LabDataManager.SendData(eyepositiondata);
-                        //LabTools.WriteData(eyepositiondata, "default", true);
+                        if(MainSceneManager.gameTime > 0) GameDataManager.LabDataManager.SendData(eyepositiondata);
 
                        // Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
                         
@@ -112,7 +112,7 @@ namespace ViveSR.anipal.Eye
                     {
                         score += 1;
                         Destroy(GameObject.Find(FocusInfo.collider.name));
-                        Instantiate(dartBoard, new Vector3(positionX[score], positionY[score], positionZ[score]), new Quaternion(0, 0, 0, 0));
+                        Instantiate(dartBoard, new Vector3(positionX[score%30], positionY[score%30], positionZ[score%30]), new Quaternion(0, 0, 0, 0));
                         //Instantiate(dartBoard, new Vector3(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(8.5f, 10.0f), UnityEngine.Random.Range(-4.0f, -2.0f)), new Quaternion(0, 0, 0, 0));
                     }
 
