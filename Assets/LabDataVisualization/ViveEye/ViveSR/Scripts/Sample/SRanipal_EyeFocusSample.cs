@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using LabData;
 
 namespace ViveSR.anipal.Eye
 {
@@ -15,6 +16,11 @@ namespace ViveSR.anipal.Eye
         float Timer = 0f;
         float reciprocal = 0f; //倒數秒數
         public static int score = 0; //注視成功次數
+
+        public Vector2 EyeData { get; set; }
+        SingleEyeData LeftData { get; set; }
+        SingleEyeData RightData { get; set; }
+        SingleEyeData Combined { get; set; }
 
         //標靶生成位置(各30組)
         float[] positionX = new float[] {2.13f, -0.01f, 1.33f, -0.84f, 0.46f, -1.82f, 2.91f, -1.88f, 1.24f, -1.24f, 2.70f, -1.18f, 2.33f, -1.13f, 0.30f, -0.08f, 0.90f, -0.63f, -1.14f, 2.57f, 1.33f, -0.84f, 0.46f, -1.82f, 2.91f, -0.08f, 0.90f, -0.63f, -1.14f, 2.57f};
@@ -41,8 +47,51 @@ namespace ViveSR.anipal.Eye
 
         private void Update()
         {
-            if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
-                SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
+            if (SRanipal_Eye_Framework.Status == SRanipal_Eye_Framework.FrameworkStatus.WORKING)
+            {
+                print("RRRR");
+                VerboseData data;
+                if (SRanipal_Eye.GetVerboseData(out data) &&
+                    data.left.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY) &&
+                    data.right.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY)
+                    )
+                {
+                    Debug.Log("第四步");
+                    EyeData = data.left.pupil_position_in_sensor_area;
+                    //LeftData = data.left;
+                    //RightData = data.right;
+                    Combined = data.combined.eye_data;
+                    //Debug.Log("Left:" + data.left.pupil_position_in_sensor_area + "~O~O~" + "Right:" + data.right.pupil_position_in_sensor_area);
+                    Ray GazeRay = new Ray();
+                    if (SRanipal_Eye.Focus(GazePriority[0], out GazeRay, out FocusInfo, float.MaxValue))
+                    {
+                        //FocusName = FocusInfo.collider.gameObject.name;
+                        //Debug.Log("射線撞到: "+FocusName+"啦啦啦啦啦");
+                        GameEventCenter.DispatchEvent("ShowEyeFocus", FocusName);
+                        GameEventCenter.DispatchEvent("GetEyeContact", FocusName);
+
+                        //回傳labdata的資料 要另外寫一個class
+                        EyePositionData eyepositiondata = new EyePositionData() //記錄eyedata
+                        {
+                           // X = FocusInfo.point.x,
+                            //Y = FocusInfo.point.y,
+                            //Z = FocusInfo.point.z,
+                            //FocusObject = FocusName,
+                            Pupil_Diameter = Combined.pupil_diameter_mm,
+                            Eye_Openness = Combined.eye_openness
+                        };
+                        Debug.Log("030");
+
+                        GameDataManager.LabDataManager.SendData(eyepositiondata);
+                        //LabTools.WriteData(eyepositiondata, "default", true);
+
+                        Debug.Log("0303");
+
+                       // Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
+                        Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
+                    }
+                }
+            }
 
             foreach (GazeIndex index in GazePriority)
             {
@@ -50,8 +99,9 @@ namespace ViveSR.anipal.Eye
                 if (SRanipal_Eye.Focus(index, out GazeRay, out FocusInfo, MaxDistance))
                 {
                     FocusTag = FocusInfo.collider.tag;
-                    Debug.Log("射線撞到: " + FocusInfo.collider.name);
-                    DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
+                    
+                        //Debug.Log("射線撞到: " + FocusInfo.collider.name);
+                        DartBoard dartBoard = FocusInfo.transform.GetComponent<DartBoard>();
                     if (dartBoard != null) dartBoard.Focus(FocusInfo.point);
 
                     if (FocusTag == "target")

@@ -5,6 +5,7 @@ using LabVisualization;
 using LabVisualization.EyeTracing;
 using System;
 using LabData;
+using GameData;
 #if USE_SRANIPAL
 using ViveSR.anipal.Eye;
 #endif
@@ -33,6 +34,7 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
     {
         Debug.Log("EquipmentInit");
         IsStopEyeData = false;
+//        StartCoroutine(UpdateData());
 #if USE_SRANIPAL
         if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING)
         {
@@ -44,6 +46,7 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
             Sranipal = SRanipal_Eye_Framework.Instance;
             Sranipal.StartFramework();
             IsOpenEye = true;
+
         }
 #endif
     }
@@ -66,15 +69,16 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
 
     public Func<Vector2> GetEyeTracingPos()
     {
+        Debug.Log("EyeData");
         return () => EyeData;
     }
 
     private IEnumerator UpdateData()
     {
-        //Debug.Log("第一步");
+        Debug.Log("第一步");
         while (true)
         {
-            //Debug.Log("第二步");
+            Debug.Log("第二步");
 #if USE_SRANIPAL
             if (IsStopEyeData)
             {
@@ -82,14 +86,14 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
             }
             if (SRanipal_Eye_Framework.Status == SRanipal_Eye_Framework.FrameworkStatus.WORKING)
             {
-                //Debug.Log("第三步");
+                Debug.Log("第三步");
                 VerboseData data;
                 if (SRanipal_Eye.GetVerboseData(out data) &&
                     data.left.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY) &&
                     data.right.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY)
                     )
                 {
-                    //Debug.Log("第四步");
+                    Debug.Log("第四步");
                     EyeData = data.left.pupil_position_in_sensor_area;
                     LeftData = data.left;
                     RightData = data.right;
@@ -114,6 +118,11 @@ public class EyeTrackEquipment : MonoSingleton<EyeTrackEquipment>, IEquipment, I
                             Eye_Openness = LeftData.eye_openness
                         };
                         GameDataManager.LabDataManager.SendData(eyepositiondata);
+                        Debug.Log("030");
+                        LabTools.WriteData(eyepositiondata, "default", true);
+
+                        Debug.Log("0303");
+
                         Debug.Log("FocusInfo:" + FocusName + " At (" + FocusInfo.point.x + "," + FocusInfo.point.y + "," + FocusInfo.point.z + ")");
                         Debug.Log("PupilSize :" + data.left.pupil_diameter_mm);
                         

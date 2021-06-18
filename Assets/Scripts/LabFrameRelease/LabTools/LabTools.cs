@@ -145,9 +145,11 @@ namespace LabData
         public static void WriteData<T>(T t, string dataName, bool isOverWrite = false, string filePath = "/GameData") where T : LabDataBase, new()
         {
             var path = DataPath + filePath + "/" + typeof(T).Name + "/" + dataName + ".json";
+            Debug.Log(path);
 
             if (!File.Exists(path))
             {
+                Debug.Log("no file!!!!!!!!");
                 var json = JsonConvert.SerializeObject(t);
                 var fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 StreamWriter sw = new StreamWriter(fs);
@@ -156,6 +158,7 @@ namespace LabData
             }
             else if (File.Exists(path) && isOverWrite)
             {
+                Debug.Log("有 file!!!");
                 var json = JsonConvert.SerializeObject(t);
                 var fs = new FileStream(path, FileMode.Truncate, FileAccess.ReadWrite);
                 fs.Close();

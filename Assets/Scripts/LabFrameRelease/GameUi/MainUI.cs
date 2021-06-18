@@ -4,6 +4,7 @@ using GameData;
 using LabData;
 using UnityEngine;
 using UnityEngine.UI;
+using GameData;
 
 public class MainUI : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class MainUI : MonoBehaviour
     {
         ModePage.SetActive(true);
         LoginPage.SetActive(false);
+        LabTools.CreateDataFolder<EyePositionData>(); //生成一個放labdata的資料夾
     }
     public void changeSceneEasy()
     {

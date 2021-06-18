@@ -28,7 +28,6 @@ public class TextUpdate : MonoBehaviour
     }
     public void back2IInit()
     {
-        //LabTools.WriteData(gameData, scriptName.text, true);
         Application.Quit();
     }
 }
