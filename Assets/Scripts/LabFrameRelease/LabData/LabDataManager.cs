@@ -67,7 +67,9 @@ namespace LabData
             }
 
             #region 初始化本地存储
-            _localSaveDataTimeLayout = LabTools.GetConfig<LabDataConfig>().LocalSaveDataTimeLayout;
+            //_localSaveDataTimeLayout = LabTools.GetConfig<LabDataConfig>().LocalSaveDataTimeLayout;
+            _localSaveDataTimeLayout = "yyyyMMddHHmm";
+            Debug.Log("LocalSaveDataTimeLayout: " + _localSaveDataTimeLayout);
             _userId = userId;
             _saveDataPath = Application.dataPath + "/Output";
             LabTools.CreatSaveDataFolder(_saveDataPath);
