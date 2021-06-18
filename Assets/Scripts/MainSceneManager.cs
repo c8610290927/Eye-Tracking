@@ -7,14 +7,18 @@ using ViveSR.anipal.Eye;
 
 public class MainSceneManager : MonoBehaviour
 {
-    float gameTime = 10f;  //遊戲時間
+    float gameTime = 10f; //遊戲時間
     GameObject image;
+    GameObject image_3D;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("啦啦啦ouq");
         image = GameObject.FindObjectOfType<Image>().gameObject;
-        image.SetActive(false); //隱藏結算畫面
+        image_3D = GameObject.Find("Camera Image");
+        print(image_3D.name);
+        image.SetActive(false);    //隱藏PC上的結算畫面
+        image_3D.SetActive(false); //隱藏頭盔中的結算畫面
         VisualizationManager.Instance.StartDataVisualization();
         VisualizationManager.Instance.VisulizationInit();
     }
@@ -32,9 +36,12 @@ public class MainSceneManager : MonoBehaviour
             GameObject.Find("Canvas").GetComponent<TextUpdate>().changeFixationTimesText(SRanipal_EyeFocusSample.score);
             GameObject.Find("Canvas").GetComponent<TextUpdate>().changeModeText(MainUI.mode);
             image.SetActive(true); //顯示結算畫面
+            image_3D.SetActive(true); //顯示頭盔結算畫面
             //刪除後方倒數
             GameObject.Find("FixationTimer").gameObject.SetActive(false); 
             GameObject.Find("GameTimer").gameObject.SetActive(false); 
+
+            Destroy(GameObject.FindWithTag("target"));
         }
     }
 }

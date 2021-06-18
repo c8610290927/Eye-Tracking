@@ -75,8 +75,6 @@ namespace ViveSR.anipal.Eye
                         {
                             X = FocusInfo.point.x,
                             Y = FocusInfo.point.y,
-                            //Z = FocusInfo.point.z,
-                            //FocusObject = FocusName,
                             Pupil_Diameter = data.left.pupil_diameter_mm,
                             Eye_Openness = data.left.eye_openness
                         };

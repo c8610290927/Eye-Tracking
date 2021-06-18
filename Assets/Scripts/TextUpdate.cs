@@ -8,6 +8,7 @@ public class TextUpdate : MonoBehaviour
     public Text fixationTimer;
     public Text GameTimer;
     public Text fixationTimes;
+    public Text fixationTimes_3D;
     public Text Mode;
 
     public void changeFixationText(float timer)
@@ -21,6 +22,7 @@ public class TextUpdate : MonoBehaviour
     public void changeFixationTimesText(float times)
     {
         fixationTimes.text = "Fixation Times: "+times.ToString("0.00");
+        fixationTimes_3D.text = "Fixation Times: "+times.ToString("0.00");
     }
     public void changeModeText(string mode)
     {
