@@ -4,7 +4,6 @@ using GameData;
 using LabData;
 using UnityEngine;
 using UnityEngine.UI;
-using GameData;
 
 public class MainUI : MonoBehaviour
 {
@@ -13,15 +12,27 @@ public class MainUI : MonoBehaviour
     [Header("LoginPage")]
     #region LoginPage
     public InputField UserID;
+    //public Text warningText;
+
     #endregion
 
     public static string mode;
 
     public void gameStartClick()
     {
+        print("userID:"+ UserID.text);
+        if (UserID.text == "")
+        {
+            print("Please enter your user ID/name ! ! !");
+            UserID.text = "default";
+            //warningText.text = "Please enter your user ID/name ! ! !";
+        }
         ModePage.SetActive(true);
         LoginPage.SetActive(false);
         LabTools.CreateDataFolder<EyePositionData>(); //生成一個放labdata的資料夾
+
+        GameDataManager.LabDataManager.LabDataCollectInit(() => UserID.text);
+        
     }
     public void changeSceneEasy()
     {

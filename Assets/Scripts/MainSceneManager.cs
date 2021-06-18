@@ -7,7 +7,7 @@ using ViveSR.anipal.Eye;
 
 public class MainSceneManager : MonoBehaviour
 {
-    float gameTime = 10f;
+    float gameTime = 10f;  //遊戲時間
     GameObject image;
     // Start is called before the first frame update
     void Start()
